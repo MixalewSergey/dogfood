@@ -14,7 +14,7 @@ h1, h2, h3{
         grid-template-columns: 1fr 2fr;
         grid-auto-rows: 40px;
         align-items: center;
-        grid-column-end: 2;
+        grid-column-end: span 2;
       }
 .promo h3 {
         grid-row-start: 1;
