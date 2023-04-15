@@ -1,5 +1,5 @@
 const Promo = (props) => {
-    //props- объект в котором можно передеать разне свойства для компонента
+    //props- объект в который можно передать разные свойства для компонента
     let name = "promo";
     switch (props.type) {
         case "lg": name = "promo big"; break;
@@ -20,12 +20,12 @@ const adds = [];
 
 let text = "Полёты собак в космос — серия биологических экспериментов, включавших проведение исследований по возможности полётов на геофизических и космических ракетах живых существ, наблюдение за поведением высокоорганизованных животных в условиях таких полётов, а также, изучение сложных явлений в околоземном пространстве."
 text = text.match(/[^\s,.]+/g);
-console.log(text);
+//console.log(text);
 
 const rand = (n) => Math.floor(Math.random() * n);
 
 let n = 8;
-while(n--) {
+while (n--) {
     adds.push({
         text: `${text[rand(text.length)]} ${text[rand(text.length)]} ${text[rand(text.length)]}`,
         pic: !!Math.round(Math.random()), // !!0 => false - !!1 => true
@@ -43,11 +43,11 @@ const App = () => {
                 <mark>React!</mark>
             </h2>
             <div className="container">
-                <Promo text="magic" type="lg" />
-                <Promo text="O_o" />
-                <Promo text="Doggy" pic={true} />
-                <Promo text="Гав" type="sm" />
-                <Promo />
+                <Promo text="My promo" type="lg" />
+                <Promo text="O_o"/>
+                <Promo text="Doggy" pic={true}/>
+                <Promo text="Гав" type="sm"/>
+                <Promo text="Мяу !?" type="sm"/>
             </div>
         </div>
     )
