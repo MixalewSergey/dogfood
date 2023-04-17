@@ -1,19 +1,7 @@
-const Promo = (props) => {
-    //props- объект в который можно передать разные свойства для компонента
-    let name = "promo";
-    switch (props.type) {
-        case "lg": name = "promo big"; break;
-        case "sm": name = "promo small"; break;
-        default: name = "promo";
-    }
-
-    return (
-        <div className={name}>
-            <div className={props.pic ? "promo-pic" : "promo-pic pic2"}></div>
-            <h3>{props.text}</h3>
-        </div>
-    )
-}
+import Promo from"./components/Promo/Promo";
+import Card from "./components/Card";
+import { Header, Footer } from "./components/General";
+import cardsData from "./assets/data.json";
 
 const sizes = ["sm", "lg", "md"];
 const adds = [];
@@ -29,25 +17,22 @@ while (n--) {
     adds.push({
         text: `${text[rand(text.length)]} ${text[rand(text.length)]} ${text[rand(text.length)]}`,
         pic: !!Math.round(Math.random()), // !!0 => false - !!1 => true
-        sizes: sizes[rand(sizes.length)]
+        size: sizes[rand(sizes.length)]
     })
 }
 console.log(adds)
 
 const App = () => {
     return (
-        <div title="Doggy">
-            <h1>Hello</h1>
-            <hr />
-            <h2>
-                <mark>React!</mark>
-            </h2>
-            <div className="container">
-                <Promo text="My promo" type="lg" />
-                <Promo text="O_o"/>
-                <Promo text="Doggy" pic={true}/>
-                <Promo text="Гав" type="sm"/>
-                <Promo text="Мяу !?" type="sm"/>
+        <div>
+             <div className="container">
+               <Card
+                  img={cardsData[0].pictures}
+                  name={cardsData[0].name}
+                  price={cardsData[0].price}
+                   />
+                   
+                {adds.map(el => <Promo{...el}type={el.size}/>)} 
             </div>
         </div>
     )

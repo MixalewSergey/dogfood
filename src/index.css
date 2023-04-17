@@ -1,46 +1,22 @@
 body{
     background-color: darkslateblue;
     color: #fff;
+    margin: 0;
 
 }
 h1, h2, h3{
     margin: 0;
 }
-.promo {
-        padding: 20px;
-        border: 1px solid;
-        border-radius: 4px;
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        grid-auto-rows: 40px;
-        align-items: center;
-        grid-column-end: span 2;
-      }
-.promo h3 {
-        grid-row-start: 1;
-      }
-.promo-pic {
-        width: 100%;
-        height: 100%;
-        grid-column-start: 2;
-        background-image: url("./assets/images/Promo1.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: right center;
-      }
+
 .container{
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
-
+        padding: 30px 50px;
       }
-      .promo.big{
-        grid-column:1 /span 4;
+        
 
+      a {
+        color: inherit;
+        text-decoration: none;
       }
-      .promo.small{
-        grid-column-end: span 1;
-}
-.pic2{
-    background-image: url(./assets/images/Promo2.webp);
-}
