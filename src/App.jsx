@@ -1,6 +1,6 @@
-import Promo from"./components/Promo/Promo";
+import Promo from "./components/Promo/Promo";
 import Card from "./components/Card";
-import { Header, Footer } from "./components/General";
+import {Header, Footer} from "./components/General";
 import cardsData from "./assets/data.json";
 
 const sizes = ["sm", "lg", "md"];
@@ -15,25 +15,35 @@ const rand = (n) => Math.floor(Math.random() * n);
 let n = 8;
 while (n--) {
     adds.push({
-        text: `${text[rand(text.length)]} ${text[rand(text.length)]} ${text[rand(text.length)]}`,
+        text: `${text[rand(text.length)].slice(0,8)} ${text[rand(text.length)].slice(0,8)} ${text[rand(text.length)].slice(0,8)}`,
         pic: !!Math.round(Math.random()), // !!0 => false - !!1 => true
         size: sizes[rand(sizes.length)]
     })
 }
-console.log(adds)
+//console.log(adds)
 
 const App = () => {
+    const user = localStorage.getItem("rockUser")
     return (
         <div>
-             <div className="container">
-               <Card
-                  img={cardsData[0].pictures}
-                  name={cardsData[0].name}
-                  price={cardsData[0].price}
-                   />
-                   
-                {adds.map(el => <Promo{...el}type={el.size}/>)} 
+            <Header user = {user}/>
+            <div className="container">
+                { /* <Card
+               //   img={cardsData[0].pictures}
+               //   name={cardsData[0].name}
+               //   price={cardsData[0].price}
+                //   />
+    */}
+
+                {cardsData.map((el, i) => <Card
+                    key={i}
+                    img={el.pictures}
+                    name={el.name}
+                    price={el.price}
+                />)}
+                {adds.map((el,i) => <Promo key ={i} {...el} type={el.size} />)}
             </div>
+            <Footer/>
         </div>
     )
 }

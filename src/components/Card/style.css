@@ -5,7 +5,6 @@
     background-color: #fff;
     color: #222;
     border-radius: 4px;
-    justify-content: center;
     text-align: center;
 }
 .card__img{
@@ -19,6 +18,8 @@
     background-color: darkslateblue;
     color:#fff;
     border-radius: 4px;
+    cursor: pointer;
+  
 }
 .card__btn:hover{
     background-color: #777;
