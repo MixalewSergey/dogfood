@@ -17,6 +17,7 @@ h1, h2, h3{
         gap: 20px;
         padding: 30px 50px;
       }
-        
+.container .search-block{
+  grid-column-end: span 4;
 
-     
+}   

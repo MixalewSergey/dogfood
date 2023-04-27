@@ -2,7 +2,7 @@ import Promo from "./components/Promo/Promo";
 import Card from "./components/Card";
 import {Header, Footer} from "./components/General";
 import cardsData from "./assets/data.json";
-
+import Search from "./components/Search";
 const sizes = ["sm", "lg", "md"];
 const adds = [];
 
@@ -34,7 +34,7 @@ const App = () => {
                //   price={cardsData[0].price}
                 //   />
     */}
-
+<Search/>
                 {cardsData.map((el, i) => <Card
                     key={i}
                     img={el.pictures}
