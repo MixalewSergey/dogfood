@@ -1,12 +1,14 @@
 import Logo from "./Logo";
 
-const Header=({user})=>{
+const Header=({user, setUser})=>{
     const logOut=(e)=>{
         e.preventDefault();
+        setUser("");//значение false  setUser("null");setUser();setUser("rockUser");
         localStorage.removeItem("rockUser");
     }
     const logIn=(e)=>{
         e.preventDefault();
+        setUser("rockUser");
         localStorage.setItem("rockUser","lk-band");
     }
     return(<header>

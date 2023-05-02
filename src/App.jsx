@@ -25,10 +25,10 @@ while (n--) {
 
 const App = () => {
     const [goods, setGoods] = useState(cardsData);
-    const user = localStorage.getItem("rockUser")
+    const [user, setUser] = useState(localStorage.getItem("rockUser"))
     return (
         <div>
-            <Header user = {user}/>
+            <Header user = {user} setUser={setUser}/>
             <div className="container">
                 { /* <Card
                //   img={cardsData[0].pictures}
