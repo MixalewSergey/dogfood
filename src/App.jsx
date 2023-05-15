@@ -4,6 +4,10 @@ import Card from "./components/Card";//index.jsx
 import {Header, Footer} from "./components/General";
 import cardsData from "./assets/data.json";// data.json
 import Search from "./components/Search";
+import Modal from "./components/Modal";
+
+
+
 const sizes = ["sm", "lg", "md"];
 const adds = [];
 
@@ -26,9 +30,12 @@ while (n--) {
 const App = () => {
     const [goods, setGoods] = useState(cardsData);
     const [user, setUser] = useState(localStorage.getItem("rockUser"))
+    const [modalActive, setModalActive] = useState(false);
     return (
-        <div>
-            <Header user = {user} setUser={setUser}/>
+        <>
+            <Header user = {user} 
+            setUser={setUser}
+            setModalActive={setModalActive}/>
             <div className="container">
                 { /* <Card
                //   img={cardsData[0].pictures}
@@ -47,7 +54,12 @@ const App = () => {
                 {adds.map((el,i) => <Promo key ={i} {...el} type={el.size} />)}
             </div>
             <Footer/>
-        </div>
+            <Modal 
+            setUser={setUser}
+             active={modalActive}
+             setActive={setModalActive}
+             />
+        </>
     )
 }
 export default App;
