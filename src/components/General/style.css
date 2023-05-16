@@ -10,7 +10,7 @@
 }
 
 header {
-    background-color: silver;
+    background-color:#8D6DD7;
     color: #000;
     display: flex;
     align-items: center;
@@ -31,6 +31,8 @@ header {
 .footer__cell {
     display: flex;
     justify-content: space-between;
+    background-color:#8D6DD7;
+    color: #000;
 
 }
 .footer__info{
