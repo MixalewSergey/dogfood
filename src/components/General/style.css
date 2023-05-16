@@ -21,3 +21,18 @@ header {
     display: flex;
     gap: 20px;
 }
+.footer__menu {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    margin: 20px;
+   
+}
+.footer__cell {
+    display: flex;
+    justify-content: space-between;
+
+}
+.footer__info{
+    margin: 20px;
+}

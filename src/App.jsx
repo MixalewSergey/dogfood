@@ -17,7 +17,7 @@ text = text.match(/[^\s,.]+/g);
 
 const rand = (n) => Math.floor(Math.random() * n);
 
-let n = 8;
+let n = 4;
 while (n--) {
     adds.push({
         text: `${text[rand(text.length)].slice(0,8)} ${text[rand(text.length)].slice(0,8)} ${text[rand(text.length)].slice(0,8)}`,
@@ -36,7 +36,7 @@ const App = () => {
             <Header user = {user} 
             setUser={setUser}
             setModalActive={setModalActive}/>
-            <div className="container">
+            {user && <div className="container">
                 { /* <Card
                //   img={cardsData[0].pictures}
                //   name={cardsData[0].name}
@@ -52,7 +52,8 @@ const App = () => {
                     price={el.price}
                 />)}
                 {adds.map((el,i) => <Promo key ={i} {...el} type={el.size} />)}
-            </div>
+            </div>}
+            
             <Footer/>
             <Modal 
             setUser={setUser}
