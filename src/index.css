@@ -20,4 +20,11 @@ h1, h2, h3{
 .container .search-block{ 
   grid-column-end: span 4;
 
-}   
+} 
+@media (max-width: 650px){
+  .header{
+    display: flex;
+    flex-direction: column;
+  }
+
+}

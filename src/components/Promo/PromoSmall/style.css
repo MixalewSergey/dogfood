@@ -1,0 +1,20 @@
+
+.promo__down{
+    display: flex;
+    justify-content: space-around;
+    padding: 25px;
+}
+@media (max-width: 720px){
+    .promo__down{
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (max-width: 1024px){
+    .promo__down{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

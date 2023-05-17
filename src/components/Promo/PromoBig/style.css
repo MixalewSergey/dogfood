@@ -1,0 +1,13 @@
+h1{
+    color: black;
+    
+}
+.promo__up{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    }
+    .border img{
+ border-radius: 25px;   
+    }

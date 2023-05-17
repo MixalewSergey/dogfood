@@ -14,6 +14,7 @@ const Header=({user, setUser,setModalActive})=>{
     }
     return(<header>
         <Logo/>
+        <div className="slogan">Натуральное питание для вашего питомца</div>
         <div className="search"></div>
         <nav className="header__menu">
             {/**Если пользователь === true (если слева тру то отображает то что справа после &&)*/ }
