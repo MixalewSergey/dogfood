@@ -1,4 +1,5 @@
 import Logo from "./Logo";
+import {Link} from"react-router-dom"
 
 const Footer=()=>{
     return<footer>
@@ -7,16 +8,16 @@ const Footer=()=>{
            
         
         <div className="footer__cell footer__menu">
-            <a href="">Каталог</a>
-            <a href="">избранное</a>
-            <a href="">Корзина</a>
+            <Link to="/catalog">Каталог</Link>
+            <Link to="">избранное</Link>
+            <Link to="">Корзина</Link>
              <div>©{new Date().getFullYear()}</div>
         </div>
         <Logo/>
         <div className="footer__info">
             <h2>Мы на связи</h2>
             <p>+7(999)999 99 99</p>
-            <p>RockDog@mail.com</p>
+           <Link to="/draft"><p>RockDog@mail.com</p></Link>
         </div>
         </div>
     </footer>

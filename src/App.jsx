@@ -1,13 +1,16 @@
 import { useState } from "react";
-import Promo from "./components/Promo/Promo";//proma.jsx
-import Card from "./components/Card";//index.jsx
+import { Routes, Route } from "react-router-dom";
+// Кусочки кода которые используються многократно
 import {Header, Footer} from "./components/General";
-import cardsData from "./assets/data.json";// data.json
 import Search from "./components/Search";
 import Modal from "./components/Modal";
 import PromoBig from "./components/Promo/PromoBig/PromoBig";
 import PromoSmall from "./components/Promo/PromoSmall/PromoSmall";
-
+// страницы-отдельный компанент со своим набором компанентов
+import Draft from "./pages/Draft";
+import Main from "./pages/Main";
+import Catalog from "./pages/Catalog";
+import Profile from "./pages/Profile";
 
 // const sizes = ["sm", "lg", "md"];
 // const adds = [];
@@ -32,33 +35,28 @@ import PromoSmall from "./components/Promo/PromoSmall/PromoSmall";
 //console.log(adds)
 
 const App = () => {
-    const [goods, setGoods] = useState(cardsData);
     const [user, setUser] = useState(localStorage.getItem("rockUser"))
     const [modalActive, setModalActive] = useState(false);
     return (
         <>
             <Header user = {user} 
-            setUser={setUser}
-            setModalActive={setModalActive}/>
-            <PromoBig/> 
-            {user && <div className="container">
-                { /* <Card
-               //   img={cardsData[0].pictures}
-               //   name={cardsData[0].name}
-               //   price={cardsData[0].price}
-                //   />
-    */}
-                <Search arr = {cardsData} upd={setGoods}/>
+           setModalActive={setModalActive}/>
+        {!user&&<PromoBig/>}   
+       {user && <main>
+        {/* SPA - Single Page Application (Одностраничное приложение) */}
+        
+        <Routes>
 
-                {goods.map((el, i) => <Card
-                    key={i}
-                    img={el.pictures}
-                    name={el.name}
-                    price={el.price}
-                />)}
-                {/* {adds.map((el,i) => <Promo key ={i} {...el} type={el.size} />)} */}
-            </div>}
-            <PromoSmall/>
+            <Route path="/" element ={<Main/>}/>
+            <Route path="/catalog" element={<Catalog/>}/>
+            <Route path="/draft"  element={<Draft/>} />
+            <Route path="/profile" element={<Profile user={user} setUser={setUser} color="blue"/>}/>
+        </Routes>
+        
+
+         </main>}
+         {!user&&<PromoSmall/>}
+            
             <Footer/>
             <Modal 
             setUser={setUser}

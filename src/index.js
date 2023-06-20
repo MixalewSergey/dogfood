@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import {BrowserRouter} from"react-router-dom"
 import App from "./App"
 import "./index.css";
 import { render } from "react-dom";
@@ -8,7 +9,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
  //   React.createElement("h1", null, "Hello React!")
 //)
 root.render(
-    <App/>
+    <BrowserRouter>
+          <App/>
+    </BrowserRouter>
 )
     
 
