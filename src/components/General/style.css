@@ -21,6 +21,12 @@ header {
 .header__menu {
     display: flex;
     gap: 20px;
+    font-size:2em;
+}
+.BoxArrowInLeft{
+    color: #000;
+    font-size:2em;
+    
 }
 .footer__menu {
     display: flex;

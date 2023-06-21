@@ -6,3 +6,8 @@
     border-radius: 4px;
     padding: 10px;
 }
+.search-button{
+    border-radius: 4px;
+    color: blue; 
+    background-color: aqua;
+}

@@ -18,7 +18,7 @@ const Search = ({ arr, upd}) => {
 
     let n = 1;
     const click = () => {
-        console.log(n++);
+        // console.log(n++);
         /**
          * Вызывая фунткцию updateCount, мы говорим приложению
          * Что при следующем монтаже его параметр  count 
@@ -50,7 +50,7 @@ const Search = ({ arr, upd}) => {
             но если нужно фильтровать ид ругие операции 
             лучше отдельно вынести функцию !!!
            */}
-            <button onClick={click}>Кнопочка</button>
+            <button className="search-button" onClick={click}>Кнопочка</button>
             <hr />
             {/* <div>{text},{n},{count}</div> */}
             <div>По вашему запросу « {text} » найдено {quantity} подходящих товаров</div>

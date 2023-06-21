@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";//useEffect срабатывает каждый раз при создание или пересоздание компонента!
 import { Routes, Route } from "react-router-dom";
 // Кусочки кода которые используються многократно
 import {Header, Footer} from "./components/General";
@@ -36,25 +36,60 @@ import Profile from "./pages/Profile";
 
 const App = () => {
     const [user, setUser] = useState(localStorage.getItem("rockUser"))
+    const [token, setToken] = useState(localStorage.getItem("rockToken"))
     const [modalActive, setModalActive] = useState(false);
+    // Товары из БД
+    const [serverGoods, setServerGoods] = useState([]);
+    // Товары для поиска и фильтрации
+    const [goods, setGoods] = useState(serverGoods);
+    
+    useEffect(()=>{
+        if(token){
+        fetch("https://api.react-learning.ru/products",{
+            headers:{
+                "Authorization":`Bearer ${token}`
+            }
+        }
+        )
+        .then(res=>res.json())
+        .then(data=>{console.log(data)
+           setServerGoods(data.products)})
+        }
+     }, [token])
+
+     useEffect(()=>{
+        setGoods(serverGoods);
+     },[serverGoods])
+
+    useEffect(()=>{
+        if(user){
+            setToken(localStorage.getItem("rockToken"))
+        }else{
+            setToken("");
+        }
+        console.log("u", user);
+        console.log("t", token);
+    },[user])
+
     return (
         <>
             <Header user = {user} 
            setModalActive={setModalActive}/>
         {!user&&<PromoBig/>}   
-       {user && <main>
-        {/* SPA - Single Page Application (Одностраничное приложение) */}
-        
-        <Routes>
+       <main>
+        <Search arr={[]} upd={()=>{}}/>
+       
+        {/* SPA - Single Page Application (Одностраничное приложение) */}       
+   {user && <Routes>
 
             <Route path="/" element ={<Main/>}/>
             <Route path="/catalog" element={<Catalog/>}/>
             <Route path="/draft"  element={<Draft/>} />
             <Route path="/profile" element={<Profile user={user} setUser={setUser} color="blue"/>}/>
-        </Routes>
+        </Routes>}
         
 
-         </main>}
+         </main>
          {!user&&<PromoSmall/>}
             
             <Footer/>

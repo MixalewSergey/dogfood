@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Profile=({user, color, setUser})=>{
     const navigate= useNavigate();  
-    const captionStyle ={
+     const captionStyle ={
         fontWeight : "bold",
         color : color,
         }
@@ -14,6 +14,8 @@ const Profile=({user, color, setUser})=>{
         e.preventDefault();
         setUser("");//значение false  setUser("null");setUser();setUser("rockUser");
         localStorage.removeItem("rockUser");
+        localStorage.removeItem("rockToken");
+        localStorage.removeItem("rockId");
         navigate("/");
         // useNavigate()("/");-замыкание
     }
