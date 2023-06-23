@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./style.css";
 //arr-список товаров из Json- файла
 const Search = ({ arr, upd}) => {
@@ -16,9 +16,20 @@ const Search = ({ arr, upd}) => {
       */
     const [count, updateCount] = useState(0);
 
+    useEffect(()=>{
+        if(text){
+            let result = arr.filter(el=> new RegExp(text, "i").test(el.name))
+        upd(result);
+        setQuantity(result.length);
+        }else{
+            upd(arr);
+            setQuantity(arr.length)
+        }
+    },[arr]);
+
     let n = 1;
     const click = () => {
-        // console.log(n++);
+        console.log(n++);
         /**
          * Вызывая фунткцию updateCount, мы говорим приложению
          * Что при следующем монтаже его параметр  count 
@@ -39,7 +50,7 @@ const Search = ({ arr, upd}) => {
     }
     return (
         <div className="search-block">
-            <input type="search" value={text}
+            <input  placeholder="ищу тебя" type="search" value={text}
                 onChange={searchByText} />
             {/**<input 
              * type="search"

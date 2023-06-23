@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Search from "../components/Search";
+
 import Card from "../components/Card";
 import cardsData from "../assets/data.json";// data.json
 import PromoBig from "../components/Promo/PromoBig/PromoBig";
@@ -19,7 +19,7 @@ const Draft=()=>{
                //   price={cardsData[0].price}
                 //   />
     */}
-                <Search arr = {cardsData} upd={setGoods}/>
+                
 
                 {goods.map((el, i) => <Card
                     key={i}

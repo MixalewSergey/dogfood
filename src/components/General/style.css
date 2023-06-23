@@ -23,6 +23,24 @@ header {
     gap: 20px;
     font-size:2em;
 }
+.badge-el{
+    display: flex;
+    position: relative;
+}
+.badge-item{
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: aqua;
+    color: black;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: .60em;
+    top : -15%;
+    right: -30%;
+}
 .BoxArrowInLeft{
     color: #000;
     font-size:2em;

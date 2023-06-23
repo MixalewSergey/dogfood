@@ -9,7 +9,7 @@ const Footer=()=>{
         
         <div className="footer__cell footer__menu">
             <Link to="/catalog">Каталог</Link>
-            <Link to="">избранное</Link>
+            <Link to="/favorites">избранное</Link>
             <Link to="">Корзина</Link>
              <div>©{new Date().getFullYear()}</div>
         </div>

@@ -11,6 +11,8 @@ import Draft from "./pages/Draft";
 import Main from "./pages/Main";
 import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
+import Product from "./pages/Product";
+import Favorites from "./pages/Favorites";
 
 // const sizes = ["sm", "lg", "md"];
 // const adds = [];
@@ -38,6 +40,7 @@ const App = () => {
     const [user, setUser] = useState(localStorage.getItem("rockUser"))
     const [token, setToken] = useState(localStorage.getItem("rockToken"))
     const [modalActive, setModalActive] = useState(false);
+    const [userId, setUserId] = useState(localStorage.getItem("rockId"))
     // Товары из БД
     const [serverGoods, setServerGoods] = useState([]);
     // Товары для поиска и фильтрации
@@ -52,20 +55,25 @@ const App = () => {
         }
         )
         .then(res=>res.json())
-        .then(data=>{console.log(data)
-           setServerGoods(data.products)})
+        .then(data=>{
+            // console.log(data)
+           setServerGoods(data.products.sort((a, b) => a.name.localeCompare(b.name)))})
         }
      }, [token])
 
      useEffect(()=>{
+        if(!goods.length){
         setGoods(serverGoods);
-     },[serverGoods])
+        }
+     },[serverGoods]);
 
     useEffect(()=>{
         if(user){
-            setToken(localStorage.getItem("rockToken"))
+            setToken(localStorage.getItem("rockToken"));
+            setUserId(localStorage.getItem("rockId"))
         }else{
             setToken("");
+            setUserId("")
         }
         console.log("u", user);
         console.log("t", token);
@@ -74,16 +82,32 @@ const App = () => {
     return (
         <>
             <Header user = {user} 
-           setModalActive={setModalActive}/>
+           setModalActive={setModalActive}
+           serverGoods={serverGoods}
+           />
         {!user&&<PromoBig/>}   
        <main>
-        <Search arr={[]} upd={()=>{}}/>
+        
+        <Search arr={serverGoods} upd={setGoods}/>
        
         {/* SPA - Single Page Application (Одностраничное приложение) */}       
    {user && <Routes>
-
+            
             <Route path="/" element ={<Main/>}/>
-            <Route path="/catalog" element={<Catalog/>}/>
+            <Route path="/catalog" element={<Catalog 
+            goods={goods}
+            //Когда мы ставим лайк на товар -его нужно обновить 
+            // в общем массиве с товарами (иначе лайк появиться 
+            // только в карточке ,но после изменения стр или перехода
+            // между страницами)мы его больше не увидим )
+            setServerGoods={setServerGoods}
+            />}/>
+            <Route path="/favorites" element ={<Favorites
+            goods={goods}
+            userId={userId}
+            setServerGoods={setServerGoods}
+            />}/>
+            <Route path="/product/:id" element ={<Product/>}/>
             <Route path="/draft"  element={<Draft/>} />
             <Route path="/profile" element={<Profile user={user} setUser={setUser} color="blue"/>}/>
         </Routes>}
