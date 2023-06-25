@@ -17,30 +17,31 @@ const Product=()=>{
         .then(res=>res.json())
         .then(data=> {
             if(!data.err){
-            console.log(data);
+            // console.log(data);
         setProuct(data)
            }
         })
     },[]);
- console.log(product.description)
+//  console.log(product.discount)//
     //  product?.name - синонемы -product && product.name
     return<>
    
     {product.name
     ?<div className="base"><div className="product">
-    <h1>{product.name}</h1>
+    <h1>{product.name}&nbsp;&nbsp;&nbsp;{product.discount > 0 &&<mark style={{background:"lime",
+     borderRadius:"35% 0%"}}>&nbsp; Акция - {product.discount}%&nbsp;</mark>} </h1>
     <img src={product.pictures } alt={product.name}/>
-   <h2>{product.description}</h2>
-    <mark>{product.discount > 0
+   <h2 style={{ color: 'black' }}>{product.description}</h2>
+    <mark style={{fontSize:"22px"}}>{product.discount > 0
         ?<>
         <del>{product.price}</del>
-        &nbsp;
-        {product.price*(100-product.discount)/100}
+        &nbsp;&nbsp;
+        <b>{product.price*(100-product.discount)/100}</b>
         </>
         :product.price 
         } ₽</mark>
    <div>
-   <p>{product.reviews[0]?.text}</p>
+   <p style={{ color: 'black' }}>{product.reviews[0]?.text}</p>
     </div>
     </div>
     </div>

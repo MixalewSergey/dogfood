@@ -1,6 +1,6 @@
 body{
     background-color: #FFEB73;
-    color: #fff;
+    color: #050505;
     margin: 0;
 
 }
@@ -27,10 +27,7 @@ main{
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
 }
-.container .search-block{ 
-  grid-column-end: span 4;
 
-} 
 @media (max-width: 720px){
   .header{
     display: flex;
@@ -42,7 +39,7 @@ main{
     gap: 20px;
     padding: 30px 50px;
   }
-.container .search-block{ 
+.search-block{ 
 grid-column-end: span 2;
 
 }
@@ -54,7 +51,7 @@ grid-column-end: span 2;
   gap: 20px;
   padding: 30px 50px;
 }
-.container .search-block{ 
+.search-block{ 
 grid-column-end: span 3;
 
 } 

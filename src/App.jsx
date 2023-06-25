@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";//useEffect срабатывает каждый раз при создание или пересоздание компонента!
 import { Routes, Route } from "react-router-dom";
+
+//подключение контекст
+import Ctx from "./context";
+
+
 // Кусочки кода которые используються многократно
 import {Header, Footer} from "./components/General";
 import Search from "./components/Search";
 import Modal from "./components/Modal";
 import PromoBig from "./components/Promo/PromoBig/PromoBig";
 import PromoSmall from "./components/Promo/PromoSmall/PromoSmall";
+
 // страницы-отдельный компанент со своим набором компанентов
 import Draft from "./pages/Draft";
 import Main from "./pages/Main";
@@ -75,27 +81,38 @@ const App = () => {
             setToken("");
             setUserId("")
         }
-        console.log("u", user);
-        console.log("t", token);
+        // console.log("u", user);
+        // console.log("t", token);
     },[user])
-
+      //value- объект с данными контекста
     return (
-        <>
-            <Header user = {user} 
+        <Ctx.Provider value={{
+            goods,
+            setGoods,
+            serverGoods,
+            setServerGoods,
+            userId,
+            setUserId,
+            user,
+            setUser,
+            token,
+            setToken,
+        }}> 
+        <Header user = {user} 
            setModalActive={setModalActive}
            serverGoods={serverGoods}
            />
         {!user&&<PromoBig/>}   
        <main>
         
-        <Search arr={serverGoods} upd={setGoods}/>
+        {/* <Search arr={serverGoods}/> - Переехал в Шапку*/}
        
         {/* SPA - Single Page Application (Одностраничное приложение) */}       
    {user && <Routes>
             
             <Route path="/" element ={<Main/>}/>
             <Route path="/catalog" element={<Catalog 
-            goods={goods}
+            
             //Когда мы ставим лайк на товар -его нужно обновить 
             // в общем массиве с товарами (иначе лайк появиться 
             // только в карточке ,но после изменения стр или перехода
@@ -122,7 +139,7 @@ const App = () => {
              active={modalActive}
              setActive={setModalActive}
              />
-        </>
+        </Ctx.Provider>
     )
 }
 export default App;

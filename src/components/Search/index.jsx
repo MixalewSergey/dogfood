@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import Ctx from "../../context";
 import "./style.css";
+import {SearchHeart} from "react-bootstrap-icons";
 //arr-список товаров из Json- файла
-const Search = ({ arr, upd}) => {
+const Search = ({arr}) => {
+    const {setGoods} = useContext(Ctx);
     // let text = "Corn";
     const [text, setText] = useState("");
     const [quantity, setQuantity] = useState(arr.length);
@@ -19,10 +22,10 @@ const Search = ({ arr, upd}) => {
     useEffect(()=>{
         if(text){
             let result = arr.filter(el=> new RegExp(text, "i").test(el.name))
-        upd(result);
+        setGoods(result);
         setQuantity(result.length);
         }else{
-            upd(arr);
+            setGoods(arr);
             setQuantity(arr.length)
         }
     },[arr]);
@@ -44,28 +47,28 @@ const Search = ({ arr, upd}) => {
         setText(val);
         let result = arr.filter(el => el.name.toLowerCase().includes(val.toLowerCase()));
         // let result = arr.filter(el=> new RegExp(val, "i").test(el.name))
-        upd(result);
+        setGoods(result);
         setQuantity(result.length);
         //console.log(result);
     }
-    return (
-        <div className="search-block">
-            <input  placeholder="ищу тебя" type="search" value={text}
-                onChange={searchByText} />
-            {/**<input 
-             * type="search"
-             *  value={text}
-            onChange={(e)=>setText(e.target.value)}/>
+    return (<input placeholder="ищу тебя" type="search" value={text}onChange={searchByText} />
+        // <div className="search-block">
+            
+        //         
+        //     {/**<input 
+        //      * type="search"
+        //      *  value={text}
+        //     onChange={(e)=>setText(e.target.value)}/>
 
-            Если писать кототкую в одну строчку функцию 
-            но если нужно фильтровать ид ругие операции 
-            лучше отдельно вынести функцию !!!
-           */}
-            <button className="search-button" onClick={click}>Кнопочка</button>
-            <hr />
-            {/* <div>{text},{n},{count}</div> */}
-            <div>По вашему запросу « {text} » найдено {quantity} подходящих товаров</div>
-        </div>
+        //     Если писать кототкую в одну строчку функцию 
+        //     но если нужно фильтровать ид ругие операции 
+        //     лучше отдельно вынести функцию !!!
+        //    */}<SearchHeart/>
+        //     {/* <button className="search-button" onClick={click}>Кнопочка</button>
+        //     <hr /> */}
+        //     {/* <div>{text},{n},{count}</div> */}
+        //     {/* <div>По вашему запросу « {text} » найдено {quantity} подходящих товаров</div> */}
+        // </div>
     )
 
 }

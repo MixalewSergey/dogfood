@@ -8,10 +8,13 @@ import {
     BoxArrowInRight,
    } from "react-bootstrap-icons"
    import { useNavigate } from "react-router-dom";
-   import { useState, useEffect} from "react";
+   import { useState, useEffect, useContext} from "react";
+   import Ctx from "../../context";
+   import Search from "../Search";
 
    
 const Header=({user, setModalActive, serverGoods})=>{
+    const {goods, setGoods} = useContext(Ctx);
     const [likeCnt, setLikeCnt] = useState(0);
     const [cartCnt, setCartCnt] = useState(0);
     useEffect(()=>{
@@ -33,8 +36,8 @@ const Header=({user, setModalActive, serverGoods})=>{
     }
     return(<header>
         <Logo/>
-        <div className="search"></div>
-        <div className="slogan">Натуральное питание для вашего питомца</div>
+        
+        <Search arr={serverGoods}/>
         <nav className="header__menu">
             {/**Если пользователь === true (если слева тру то отображает то что справа после &&)*/ }
             { user &&<>{/**(<></>)- реакт фрагмент, оставляет целостность но не учитывается при генерации  (самоизчезающийся пакет для продуктов) */}

@@ -1,7 +1,9 @@
 import Card from "../components/Card";
-import { useState } from "react";
+import { useState, useContext} from "react";
+import Ctx from "../context"
 
-const Catalog=({goods, setServerGoods})=>{
+const Catalog=({setServerGoods})=>{
+    const {goods} = useContext(Ctx)
     const [sort, setSort] = useState(null)
     const filterSt={
         gridColumnEnd:"span 4",
@@ -15,7 +17,7 @@ const Catalog=({goods, setServerGoods})=>{
             // setServerGoods(old=>[...old])
             // goods.sort((a, b)=>new Date(a.created_at).getTime()
             // - new Date(b.created_at).getTime());
-            console.log(goods)
+            // console.log(goods)
         }else{
             setSort(vector)
             goods.sort((a, b)=>{
@@ -24,6 +26,7 @@ const Catalog=({goods, setServerGoods})=>{
             })
         }
     }
+    
     return<div className="container">
         <div style={filterSt}>
             {/* Сортировка по числу price (без скидки) */}
@@ -34,8 +37,8 @@ const Catalog=({goods, setServerGoods})=>{
         onClick={()=>sortHandler("down")}
         >по убыванию цены</button>
              {/* Фильтрация */}
-        <button>Новинки</button>
-        <button>Скидки</button>
+        {/* <button>Новинки</button>
+        <button>Скидки</button> */}
         
         </div>
     {goods.map(g=><Card key={g._id} {...g} img={g.pictures}

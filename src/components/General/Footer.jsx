@@ -17,7 +17,7 @@ const Footer=()=>{
         <div className="footer__info">
             <h2>Мы на связи</h2>
             <p>+7(999)999 99 99</p>
-           <Link to="/draft"><p>RockDog@mail.com</p></Link>
+           <Link to=""><p>RockDog@mail.com</p></Link>
         </div>
         </div>
     </footer>
