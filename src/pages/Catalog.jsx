@@ -1,15 +1,14 @@
-import Card from "../components/Card";
 import { useState, useContext} from "react";
-import Ctx from "../context"
+
+import Card from "../components/Card";
+import Pagination from "../components/Pagination";
+
+import Ctx from "../context";
 
 const Catalog=({setServerGoods})=>{
     const {goods} = useContext(Ctx)
     const [sort, setSort] = useState(null)
-    const filterSt={
-        gridColumnEnd:"span 4",
-        display: "flex",
-        gap: "20px"
-    }
+    
     const sortHandler=(vector)=>{
         if(vector===sort){
             setSort(null)
@@ -27,13 +26,15 @@ const Catalog=({setServerGoods})=>{
         }
     }
     
+    
     return<div className="container">
-        <div style={filterSt}>
+        <div className="pagination__div"><Pagination/></div>
+        <div  className="containerBtn">
             {/* Сортировка по числу price (без скидки) */}
-        <button style={{background: sort ==="up" ? "lime" : "white"}}
+        <button style={{borderRadius: "8px", background: sort ==="up" ? "lime" : "white"}}
         onClick={()=>sortHandler("up")}
         >По возрастанию цены</button>
-        <button style={{background: sort ==="down" ? "lime" : "white"}}
+        <button style={{borderRadius: "8px",background: sort ==="down" ? "lime" : "white"}}
         onClick={()=>sortHandler("down")}
         >по убыванию цены</button>
              {/* Фильтрация */}

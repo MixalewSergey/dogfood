@@ -1,17 +1,4 @@
 
-
-.search-block{
-    background-color:#FFEB73;
-    color: black;
-    border-radius: 4px;
-    padding: 10px;
-}
-.search-button{
-    border-radius: 4px;
-    color: blue; 
-    background-color: aqua;
-    height: 25px;
-}
 input[type="search"]{
     border-radius: 20px;
     background-color: rgb(243, 247, 4);

@@ -37,7 +37,7 @@ const Header=({user, setModalActive, serverGoods})=>{
     return(<header>
         <Logo/>
         
-        <Search arr={serverGoods}/>
+       <span style={{textAlign:"center"}}> <Search arr={serverGoods} /></span>
         <nav className="header__menu">
             {/**Если пользователь === true (если слева тру то отображает то что справа после &&)*/ }
             { user &&<>{/**(<></>)- реакт фрагмент, оставляет целостность но не учитывается при генерации  (самоизчезающийся пакет для продуктов) */}
