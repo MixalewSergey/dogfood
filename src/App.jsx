@@ -19,7 +19,7 @@ import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Favorites from "./pages/Favorites";
-
+import Add from "./pages/AddProduct";
 // const sizes = ["sm", "lg", "md"];
 // const adds = [];
 
@@ -46,7 +46,9 @@ const App = () => {
     const [user, setUser] = useState(localStorage.getItem("rockUser"))
     const [token, setToken] = useState(localStorage.getItem("rockToken"))
     const [modalActive, setModalActive] = useState(false);
-    const [userId, setUserId] = useState(localStorage.getItem("rockId"))
+    const [userId, setUserId] = useState(localStorage.getItem("rockId"));
+    // Поиск по сайту
+    const [text, setText] = useState("");
     // Товары из БД
     const [serverGoods, setServerGoods] = useState([]);
     // Товары для поиска и фильтрации
@@ -97,6 +99,8 @@ const App = () => {
             setUser,
             token,
             setToken,
+            text,
+            setText
         }}> 
         <Header user = {user} 
            setModalActive={setModalActive}
@@ -109,7 +113,7 @@ const App = () => {
        
         {/* SPA - Single Page Application (Одностраничное приложение) */}       
    {user && <Routes>
-            
+            <Route path="/add" element ={<Add/>}/>
             <Route path="/" element ={<Main/>}/>
             <Route path="/catalog" element={<Catalog 
             

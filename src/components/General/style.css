@@ -19,10 +19,12 @@ header {
     justify-content: space-between;
     padding: 10px 50px;
     }
-.header__menu {
+.myheader__menu {
     display: flex;
     gap: 20px;
     font-size:2em;
+    justify-content: center;
+    align-items: center;
 }
 .badge-el{
     display: flex;
@@ -38,9 +40,9 @@ header {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    font-size: .60em;
+    font-size: .40em;
     top : -15%;
-    right: -30%;
+    right: -35%;
 }
 .BoxArrowInLeft{
     color: #000;
@@ -81,7 +83,7 @@ header {
       flex-direction: column;
       padding: 5px;
     }
-    .header__menu{
+    .myheader__menu{
         display: flex;
         flex-direction: column;
     }

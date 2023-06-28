@@ -18,27 +18,33 @@ h1, h2, h3{
 }    
 main{
   padding: 30px 50px;
-  
- 
 }  
 
-.container{
+main img{
+display: block;
+max-width: 100%;
+}
+
+.mycontainer{
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
+}
+.container.bs{
+  display: block;
 }
 
 .pagination__div{
   grid-column-end:span 4;
 }
-.containerBtn{
+.mycontainerBtn{
  grid-column-end: span 4;
   display: flex;
   gap: 20px;
 }
 
 @media (max-width: 1024px){
-  .container{
+  .mycontainer{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -47,7 +53,7 @@ main{
   .pagination__div{
     grid-column-end:span 3;
   }
-  .containerBtn{
+  .mycontainerBtn{
    grid-column-end: span 3;
    gap: 10px;
   
@@ -67,7 +73,7 @@ main{
     display: flex;
     flex-direction: column;
   }
-  .container{
+  .mycontainer{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -76,7 +82,7 @@ main{
   .pagination__div{
     grid-column-end:span 2;
   }
-  .containerBtn{
+  .mycontainerBtn{
     grid-column-end: span 2;
     justify-content: center;
     padding: 5px;

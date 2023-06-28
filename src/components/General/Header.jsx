@@ -6,6 +6,7 @@ import {
     Cart4,
     PersonSquare,
     BoxArrowInRight,
+    PlusSquare
    } from "react-bootstrap-icons"
    import { useNavigate } from "react-router-dom";
    import { useState, useEffect, useContext} from "react";
@@ -38,9 +39,10 @@ const Header=({user, setModalActive, serverGoods})=>{
         <Logo/>
         
        <span style={{textAlign:"center"}}> <Search arr={serverGoods} /></span>
-        <nav className="header__menu">
+        <nav className="myheader__menu">
             {/**Если пользователь === true (если слева тру то отображает то что справа после &&)*/ }
             { user &&<>{/**(<></>)- реакт фрагмент, оставляет целостность но не учитывается при генерации  (самоизчезающийся пакет для продуктов) */}
+           <Link to="/add" title="Добавить товар" className="badge-el"><PlusSquare/></Link>
             <Link to="/catalog" title="Каталог"><Folder2/></Link>
             <Link to="/favorites" title="Избранное" className="badge-el"><BagHeart/>
          {likeCnt > 0 && <span className="badge-item"> {likeCnt}</span>}</Link>

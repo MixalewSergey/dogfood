@@ -1,7 +1,7 @@
 import Card from "../components/Card";
 
 const Favorites=({goods,userId, setServerGoods})=>{
-      return<div className="container">
+      return<div className="mycontainer">
         {goods.filter(el=>el.likes.includes
             (userId)).map(g=><Card
             {...g}

@@ -4,9 +4,9 @@ import "./style.css";
 import {SearchHeart} from "react-bootstrap-icons";
 //arr-список товаров из Json- файла
 const Search = ({arr}) => {
-    const {setGoods} = useContext(Ctx);
+    const {setGoods, text, setText} = useContext(Ctx);
     // let text = "Corn";
-    const [text, setText] = useState("");
+    // const [text, setText] = useState(""); -перенесли в App
     const [quantity, setQuantity] = useState(arr.length);
     /**
       * useState= то что создает пару из
@@ -51,7 +51,7 @@ const Search = ({arr}) => {
         setQuantity(result.length);
         //console.log(result);
     }
-    return (<input placeholder="ищу тебя" type="search" value={text}onChange={searchByText} />
+    return (<input placeholder="  Поиск" type="search" value={text} onChange= {searchByText} />
         // <div className="search-block">
             
         //         

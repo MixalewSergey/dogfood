@@ -1,0 +1,27 @@
+.pagination{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pagination__item{
+    display: flex;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid aqua;
+
+}
+
+.pagination__item:hover {
+    background-color:aqua;
+}
+.pagination__item.active{
+    background-color: lime;
+    color: black;
+    font-size: x-large;
+}

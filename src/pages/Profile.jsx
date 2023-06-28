@@ -22,7 +22,7 @@ const Profile=({user, color, setUser})=>{
     
     return<>
     <h1>Личный кабинет</h1>
-    <div>
+    <div style={{display:"flex",}}>
         {/*&nbsp;- символ пробела , надо запомнить */}
       <span style={{ color: 'red' }}>Добро пожаловать,&nbsp;</span>
         <span style = {captionStyle} >{user}</span>

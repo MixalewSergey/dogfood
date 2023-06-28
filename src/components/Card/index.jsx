@@ -46,13 +46,13 @@ const Card = ({img, name, price,_id, discount,tags, likes, setServerGoods}) => {
         })
     }
    
-   return (<Link className="card" to={`/product/${_id}`}>
-    {discount>0 && <span className="card__discount">{discount}<Percent/></span>}
-    <span className="card__like" onClick={updLike}>
+   return (<Link className="mycard" to={`/product/${_id}`}>
+    {discount>0 && <span className="mycard__discount">{discount}<Percent/></span>}
+    <span className="mycard__like" onClick={updLike}>
         {isLike ? <ArrowThroughHeartFill/> : <ArrowThroughHeart/>}</span>
-    <img src={img} alt="Картинка" className="card__img"/>
-    <span className="card__name">{name}</span>
-    <span className="card__price">
+    <img src={img} alt="Картинка" className="mycard__img"/>
+    <span className="mycard__name">{name}</span>
+    <span className="mycard__price">
         {discount > 0
         ?<>
         <del>{price}</del>
@@ -62,7 +62,7 @@ const Card = ({img, name, price,_id, discount,tags, likes, setServerGoods}) => {
         :price 
         } 
     ₽</span>
-    <button className="card__btn">В корзину</button>
+    <button className="mycard__btn">В корзину</button>
     {/* <span className="card__tags">{tags.map(e=><span key={e }>{e} </span>)}</span> */}
 </Link>)
 }

@@ -11,6 +11,7 @@ const Item = ({
     end=false,
     next=false,
     prev=false,
+    active=false,
     onClick
 })=>{
     let result;
@@ -21,7 +22,9 @@ const Item = ({
       case prev : result= <ChevronLeft/>; break;
       default: result= val;
     }
-    return<div className="pagination__item" onClick={onClick}>
+    return<div className={active ?
+     "pagination__item active":
+     "pagination__item"} onClick={onClick}>
         {result}
 </div>
 }
