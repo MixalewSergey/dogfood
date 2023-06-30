@@ -10,9 +10,15 @@
     align-content: space-between;
 }
 .mycard__img{
+    display:block;
     height: 100px;
     justify-self:center;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    
 }
+
 .mycard__btn{
     border: none;
     outline: none;
@@ -26,7 +32,14 @@
 }
 .mycard__btn:hover{
     background-color:#FFC540;
+    
 }
+
+.mycard__btn:disabled{
+ opacity: .6;
+ cursor: default;
+ }
+
 .promo h3 {
     grid-row-start: 1;
     font-size: 10px;

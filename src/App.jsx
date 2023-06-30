@@ -23,6 +23,7 @@ import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Favorites from "./pages/Favorites";
 import Add from "./pages/AddProduct";
+import Basket from "./pages/Basket";
 // const sizes = ["sm", "lg", "md"];
 // const adds = [];
 
@@ -57,11 +58,28 @@ const App = () => {
     // Товары для поиска и фильтрации
     const [goods, setGoods] = useState(serverGoods);
 
-    const [api, setApi] = useState(new Api(token))
+    const [api, setApi] = useState(new Api(token));
+    
+    //basket from LS
+    let bStore = localStorage.getItem("rockBasket");
+
+    if(bStore){
+    // if(bStore && bStore[0]==="[" && bStore[bStore.length-1]==="]"){-
+    //если что то пошло не так , доп проверка
+       bStore = JSON.parse(bStore);
+    }else{
+        bStore = [];
+    }
+
+    const [basket, setBasket] = useState(bStore);
     
     useEffect(()=>{
         setApi(new Api(token));
      }, [token])
+
+    useEffect(()=>{
+        localStorage.setItem("rockBasket", JSON.stringify(basket));
+    },[basket])
 
      useEffect(()=>{
         if(api.token){
@@ -106,7 +124,9 @@ const App = () => {
             text,
             setText,
             api,
-            setApi
+            setApi,
+            basket,
+            setBasket
         }}> 
         <Header user = {user} 
            setModalActive={setModalActive}
@@ -135,6 +155,7 @@ const App = () => {
             setServerGoods={setServerGoods}
             />}/>
             <Route path="/product/:id" element ={<Product/>}/>
+            <Route path="/basket" element ={<Basket/>}/>
             <Route path="/draft"  element={<Draft/>} />
             <Route path="/profile" element={<Profile user={user} setUser={setUser} color="blue"/>}/>
         </Routes>}
