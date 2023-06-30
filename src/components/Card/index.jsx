@@ -6,10 +6,25 @@ import {ArrowThroughHeart, ArrowThroughHeartFill, Percent} from "react-bootstrap
 
 //{img, name, price}=>(props.img, prop.name, props.price)
 const Card = ({img, name, price,_id, discount,tags, likes}) => {
-    const {setServerGoods, userId, api} = useContext(Ctx)
+    const {setServerGoods, userId, api, setBasket, serverGoods, basket} = useContext(Ctx)
     //проверка , есть ли id пользователя в массиве с лайками товара 
     const [isLike, setIsLike] = useState(likes.includes(userId));
-    
+    const [inBasket, setInBasket] = useState(basket.filter(el=>el.id ===_id).length>0);
+
+    const addToCart=(e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        setInBasket(true);
+        setBasket(prev => [...prev,{
+            id:_id,
+            cnt:1,
+            name:name,
+            img:img,
+            price:price,
+            discount:discount
+        }])
+    }
+
     const updLike=(e)=>{
      e.stopPropagation();
      e.preventDefault();
@@ -65,7 +80,11 @@ const Card = ({img, name, price,_id, discount,tags, likes}) => {
         :price 
         } 
     ₽</span>
-    <button className="mycard__btn">В корзину</button>
+    <button 
+    className="mycard__btn" 
+    onClick={addToCart} 
+    disabled={inBasket}
+    >В корзину</button>
     {/* <span className="card__tags">{tags.map(e=><span key={e }>{e} </span>)}</span> */}
 </Link>)
 }

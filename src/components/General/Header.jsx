@@ -15,7 +15,7 @@ import {
 
    
 const Header=({user, setModalActive, serverGoods})=>{
-    const {goods, setGoods} = useContext(Ctx);
+    const {goods, setGoods, basket} = useContext(Ctx);
     const [likeCnt, setLikeCnt] = useState(0);
     const [cartCnt, setCartCnt] = useState(0);
     useEffect(()=>{
@@ -24,6 +24,15 @@ const Header=({user, setModalActive, serverGoods})=>{
        setLikeCnt(serverGoods.filter(el=>el.likes.includes(
         localStorage.getItem("rockId"))).length)
     },[serverGoods]);
+
+    useEffect(()=>{
+        let cnt = 0 ;
+        for(let i = 0 ; i<basket.length; i++){
+            cnt+=basket[i].cnt
+        }
+       setCartCnt(cnt)
+       //setCartCnt(basket.reduce((acc,el)=>acc+el.cnt, 0))-другая вариация кода
+    },[basket])
 
     const navigateLog= useNavigate();
     
@@ -46,7 +55,7 @@ const Header=({user, setModalActive, serverGoods})=>{
             <Link to="/catalog" title="Каталог"><Folder2/></Link>
             <Link to="/favorites" title="Избранное" className="badge-el"><BagHeart/>
          {likeCnt > 0 && <span className="badge-item"> {likeCnt}</span>}</Link>
-            <Link to="" title="Корзина" className="badge-el"><Cart4/>
+            <Link to="/basket" title="Корзина" className="badge-el"><Cart4/>
             {cartCnt > 0 && <span className="badge-item"> {cartCnt}</span>}</Link>
             <Link to="/Profile" title="Профиль"><PersonSquare/></Link>
             
