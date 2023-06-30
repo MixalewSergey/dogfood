@@ -3,6 +3,12 @@ input[type="search"]{
     border-radius: 20px;
     background-color: rgb(243, 247, 4);
     height:50px;
-    width: 450px;
     font-size:x-large;
+    padding-left: 25px;
 }
+
+@media (max-width: 720px){
+    input[type="search"] {
+        padding-left: 10px;  
+    } 
+    }

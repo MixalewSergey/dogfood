@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./style.css";
+import Ctx from "../../context";
 
 const Modal = ({ active, setActive, setUser }) => {
   const [auth, setAuth] = useState("true");
@@ -7,6 +8,8 @@ const Modal = ({ active, setActive, setUser }) => {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [testPwd, setTestPwd] = useState("");
+
+  const {api} = useContext(Ctx);
 
   const testAccess = {
     color: pwd == testPwd ? "forestgreen" : "crimson"
@@ -34,18 +37,18 @@ const Modal = ({ active, setActive, setUser }) => {
       body.name = name;
       body.group = "group-12";
     }
-    let log = "https://api.react-learning.ru/signin"; // вход
-    let reg = "https://api.react-learning.ru/signup"; // регистрация 
+    // let log = "https://api.react-learning.ru/signin"; // вход
+    // let reg = "https://api.react-learning.ru/signup"; // регистрация 
     //Регистрация !== вход (после добавления пользователя 
     // в базу данных нужно будет войти в аккаунт)
-    let res = await fetch(auth ? log : reg, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(body)
-    })
-    let data = await res.json()
+    // let res = await fetch(auth ? log : reg, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(body)
+    // })
+    let data = await (auth ? api.auth(body) : api.reg(body))
     if (!data.err) {
       //при регистрации с сервера приходит объект 
       // о пользователе {name,email,_id,group}
@@ -57,14 +60,14 @@ const Modal = ({ active, setActive, setUser }) => {
       if (!auth) {
         delete body.name;
         delete body.group;
-        let resLog = await fetch(log, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(body)
-        })
-        let dataLog = await resLog.json()
+        // let resLog = await fetch(log, {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json"
+        //   },
+        //   body: JSON.stringify(body)
+        // })
+        let dataLog = await api.auth(body)
         if (!dataLog.err) {
           localStorage.setItem("rockUser", dataLog.data.name);
           localStorage.setItem("rockToken", dataLog.token);
@@ -89,9 +92,9 @@ const Modal = ({ active, setActive, setUser }) => {
 
 
   return <div
-    className="modal-wrapper"
+    className="my-modal-wrapper"
     style={{ display: active ? "flex" : "none" }}>
-    <div className="modal">
+    <div className="my-modal">
       <button onClick={() => setActive(false)} className="close-btn-modal">Закрыть окно</button>
       <h3>Авторизация</h3>
       <form onSubmit={sendForm}>
@@ -106,6 +109,7 @@ const Modal = ({ active, setActive, setUser }) => {
         <label>
           Электронный адрес
           <input
+           placeholder=""
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -114,6 +118,7 @@ const Modal = ({ active, setActive, setUser }) => {
         <label>
           Пароль
           <input
+            placeholder=""
             type="password"
             value={pwd}
             onChange={(e) => setPwd(e.target.value)}
@@ -129,8 +134,8 @@ const Modal = ({ active, setActive, setUser }) => {
           //style = {{border: 1 px solid,backgraundcolor:"green"...}}
           />
         </label>}
-        <div className="modal-ctr">
-          <button className="modal-btn"
+        <div className="my-modal-ctr">
+          <button className="my-modal-btn"
             //Если кнопка формы регистрации то проверяем :
             // соотетствие паролей  но они не должны быть пустыми
             disabled={!auth && (!pwd || pwd !== testPwd)}>
@@ -138,7 +143,7 @@ const Modal = ({ active, setActive, setUser }) => {
           </button>
           <a
             href=""
-            className="modal-link"
+            className="my-modal-link"
             onClick={switchAuth}
           >{auth ? "Регистрация" : "Войти"}</a>
         </div>

@@ -1,16 +1,79 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Container,Row,Col,Form,Button } from "react-bootstrap";
+import { useNavigate } from "react-router";
+import Ctx from "../context";
 
 
 const Add=()=>{
+    const navigate = useNavigate();
+    const {token, setServerGoods, api}= useContext(Ctx);
     const [description, setDescription] = useState("тут пока ничего нет...");
     const [discount, setDiscount]= useState ("0");
     const [name, setName] = useState("");
     const [pictures, setPictures] = useState("https://smallivingworld.ru/800/600/http/ambiance-sticker.com/images/Image/sticker-chiot-avec-un-os-5-ambiance-sticker-KC10452.jpg");
     const [price, setPrice]= useState("0");
     const [stock, setStoke] = useState("100");
-    const [tags, setTags] = useState(["new"]);
-    const [wight, setWight] = useState("100г");
+    const [tag, setTag] = useState("");
+    const [tags, setTags] = useState(["df"]);
+    const [wight, setWight] = useState("100 г");
+    // console.log(token)
+
+    const updTags=(val)=>{
+        const text = val.toLocaleLowerCase(); //- привести к общему регистру
+        let cut = text.slice(0, text.length-1);// получить строку без последнего 
+        //символа (вдруг пробел или запятая )
+       
+        if(/[\s.,;!?]$/.test(text)){
+            setTags(prev => prev.includes(cut) ? prev : [...prev, cut])
+            // Если пробел или знак препинания-
+            // обрубить этот символ и записать в массив с тегами
+            // Надо проверить насколько такого тега ещё не существует 
+            setTag("");//-очистить импут
+        }else{
+            setTag(text)// идем дальше
+        }
+            
+    }
+
+    const delTag = (tag)=>{
+        setTags(prev=>prev.filter(tg=> tg !==tag))
+    }
+
+    const clearForm=()=>{
+        setName("");
+        setPrice(0);
+        setPictures("https://smallivingworld.ru/800/600/http/ambiance-sticker.com/images/Image/sticker-chiot-avec-un-os-5-ambiance-sticker-KC10452.jpg");
+        setDiscount(0);
+        setDescription("Тут пока ничего нет...");
+        setWight("100 г");
+        setStoke(100);
+        setTags(["df"]);
+    }
+
+    const formHandler=(e)=>{
+        e.preventDefault();
+        const body={
+            name,
+            price,
+            pictures,
+            discount,
+            wight,
+            stock,
+            description,
+            tags: tag.length && !tags.includes(tag) ? [...tags, tag] : tags
+        }
+        api.addProduct(body)
+        .then(data=>{
+            console.log(data)
+            if(!data.err && !data.error){
+                setServerGoods(prev=>[data, ...prev])
+                clearForm();
+                 navigate(`/product/${data._id}`)
+            }
+        })
+        
+    }            
+   
 
     return <Container className="bs bg-light text-dark rounded-1 p-4">
         <Row>
@@ -18,7 +81,7 @@ const Add=()=>{
                 <h1>Добавить товар</h1>
             </Col>
         </Row>
-        <Form>
+        <Form onSubmit= {formHandler}> 
             <Row>
                 <Col xs={12} sm={6}>
                     <Form.Group className="my-3">
@@ -83,8 +146,17 @@ const Add=()=>{
                        <Form.Control
                           type="text" 
                           id="tags"
-                          value={tags}
-                          onChange={(e)=>setTags(e.target.value)}/>
+                          value={tag}
+                          onChange={(e)=>updTags(e.target.value)}
+                          />
+                          {tags.length > 0 && <Form.Text>
+                            {tags.map(t=><span className={`d-inline-block lh-1 ${t !=="df"
+                            ? "bg-info" : "bg-secondary"} text-light p-2 mt-2 me-2 rounded-1`}
+                            key={t}
+                            onClick={()=>delTag(t)}
+                            style={{pointerEvents: t === "df" ? "none" : "auto"}}
+                            >{t}</span>)}
+                            </Form.Text>}
                    </Form.Group>
                 </Col>
                 <Col xs={12} sm={6}>
@@ -94,8 +166,8 @@ const Add=()=>{
                         height: "16.1rem",
                         backgroundPosition:"center",
                         backgroundRepeat:"no-repeat"
+                        }}></div>
 
-                    }}></div>
                    <Form.Group className="my-3">
                      <Form.Label htmlFor="pictures">Изображение товара</Form.Label>
                        <Form.Control

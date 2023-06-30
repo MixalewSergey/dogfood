@@ -4,6 +4,9 @@ import { Routes, Route } from "react-router-dom";
 //подключение контекст
 import Ctx from "./context";
 
+//подключаем Api
+import Api  from "./api";
+
 
 // Кусочки кода которые используються многократно
 import {Header, Footer} from "./components/General";
@@ -53,21 +56,22 @@ const App = () => {
     const [serverGoods, setServerGoods] = useState([]);
     // Товары для поиска и фильтрации
     const [goods, setGoods] = useState(serverGoods);
+
+    const [api, setApi] = useState(new Api(token))
     
     useEffect(()=>{
-        if(token){
-        fetch("https://api.react-learning.ru/products",{
-            headers:{
-                "Authorization":`Bearer ${token}`
-            }
-        }
-        )
-        .then(res=>res.json())
-        .then(data=>{
-            // console.log(data)
-           setServerGoods(data.products.sort((a, b) => a.name.localeCompare(b.name)))})
-        }
+        setApi(new Api(token));
      }, [token])
+
+     useEffect(()=>{
+        if(api.token){
+            api.getProduct()
+            .then(data=>{
+                // console.log(data)
+               setServerGoods(data.products.sort((a, b) =>
+                a.name.localeCompare(b.name)))})
+        }
+     },[api.token])
 
      useEffect(()=>{
         if(!goods.length){
@@ -100,7 +104,9 @@ const App = () => {
             token,
             setToken,
             text,
-            setText
+            setText,
+            api,
+            setApi
         }}> 
         <Header user = {user} 
            setModalActive={setModalActive}

@@ -18,6 +18,7 @@ h1, h2, h3{
 }    
 main{
   padding: 30px 50px;
+  max-width: 100%;
 }  
 
 main img{

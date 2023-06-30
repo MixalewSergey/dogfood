@@ -19,6 +19,9 @@ header {
     justify-content: space-between;
     padding: 10px 50px;
     }
+header input{
+   width: 100%; 
+}
 .myheader__menu {
     display: flex;
     gap: 20px;

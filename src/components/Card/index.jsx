@@ -1,25 +1,28 @@
-import {useState} from "react";
+import {useState, useContext} from "react";
+import Ctx from "../../context";
 import "./style.css";
 import { Link } from "react-router-dom";
 import {ArrowThroughHeart, ArrowThroughHeartFill, Percent} from "react-bootstrap-icons"
 
 //{img, name, price}=>(props.img, prop.name, props.price)
-const Card = ({img, name, price,_id, discount,tags, likes, setServerGoods}) => {
+const Card = ({img, name, price,_id, discount,tags, likes}) => {
+    const {setServerGoods, userId, api} = useContext(Ctx)
     //проверка , есть ли id пользователя в массиве с лайками товара 
-    const [isLike, setIsLike] = useState(likes.includes(localStorage.getItem("rockId")));
+    const [isLike, setIsLike] = useState(likes.includes(userId));
     
     const updLike=(e)=>{
      e.stopPropagation();
      e.preventDefault();
      setIsLike(!isLike);
-     const token = localStorage.getItem("rockToken");
-     fetch(`https://api.react-learning.ru/products/likes/${_id}`,{
-        method: isLike ? "DELETE" : "PUT",
-        headers:{
-            "Authorization" : `Bearer ${token}`
-        }
-     })
-        .then(res=>res.json())
+    //  const token = localStorage.getItem("rockToken");
+     api.setLike(_id, !isLike)
+    //  fetch(`https://api.react-learning.ru/products/likes/${_id}`,{
+    //     method: isLike ? "DELETE" : "PUT",
+    //     headers:{
+    //         "Authorization" : `Bearer ${token}`
+    //     }
+    //  })
+    //     .then(res=>res.json())
         .then(data=>{
             // console.log(data);
     //изменить основной массив с товарами внутре Reack (на стороне клиента)
