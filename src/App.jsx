@@ -72,13 +72,13 @@ const App = () => {
     }
 
     const [basket, setBasket] = useState(bStore);
-<<<<<<< HEAD
+
     const [modalReviewActive, setModalReviewActive] = useState(false);
     const [product, setProduct] = useState({});
     const [addProductFormActive, setAddProductFormActive] = useState(false);
     const [editProductFormActive, setEditProductFormActive] = useState(false);
-=======
->>>>>>> fcd7df970f534b33e8cb5789c76ebd00e5eb035b
+
+
     
     useEffect(()=>{
         setApi(new Api(token));
@@ -155,10 +155,7 @@ const App = () => {
             editProductFormActive,
             setEditProductFormActive,
             api,
-<<<<<<< HEAD
-=======
             setApi,
->>>>>>> fcd7df970f534b33e8cb5789c76ebd00e5eb035b
             basket,
             setBasket
         }}> 
