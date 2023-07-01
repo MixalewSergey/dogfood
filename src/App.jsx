@@ -72,6 +72,10 @@ const App = () => {
     }
 
     const [basket, setBasket] = useState(bStore);
+    const [modalReviewActive, setModalReviewActive] = useState(false);
+    const [product, setProduct] = useState({});
+    const [addProductFormActive, setAddProductFormActive] = useState(false);
+    const [editProductFormActive, setEditProductFormActive] = useState(false);
     
     useEffect(()=>{
         setApi(new Api(token));
@@ -111,20 +115,43 @@ const App = () => {
       //value- объект с данными контекста
     return (
         <Ctx.Provider value={{
+            // goods,
+            // setGoods,
+            // serverGoods,
+            // setServerGoods,
+            // userId,
+            // setUserId,
+            // user,
+            // setUser,
+            // token,
+            // setToken,
+            // text,
+            // setText,
+            // api,
+            // setApi,
+            // basket,
+            // setBasket
             goods,
             setGoods,
             serverGoods,
             setServerGoods,
-            userId,
-            setUserId,
+            token,
+            modalActive,
+            setModalActive,
             user,
             setUser,
-            token,
-            setToken,
+            userId,
             text,
             setText,
+            modalReviewActive,
+            setModalReviewActive,
+            product,
+            setProduct,
+            addProductFormActive,
+            setAddProductFormActive,
+            editProductFormActive,
+            setEditProductFormActive,
             api,
-            setApi,
             basket,
             setBasket
         }}> 

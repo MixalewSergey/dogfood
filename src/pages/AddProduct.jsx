@@ -11,7 +11,7 @@ const Add=()=>{
     const [discount, setDiscount]= useState ("0");
     const [name, setName] = useState("");
     const [pictures, setPictures] = useState("https://smallivingworld.ru/800/600/http/ambiance-sticker.com/images/Image/sticker-chiot-avec-un-os-5-ambiance-sticker-KC10452.jpg");
-    const [price, setPrice]= useState("0");
+    const [price, setPrice]= useState("10");
     const [stock, setStoke] = useState("100");
     const [tag, setTag] = useState("");
     const [tags, setTags] = useState(["df"]);
@@ -41,7 +41,7 @@ const Add=()=>{
 
     const clearForm=()=>{
         setName("");
-        setPrice(0);
+        setPrice(10);
         setPictures("https://smallivingworld.ru/800/600/http/ambiance-sticker.com/images/Image/sticker-chiot-avec-un-os-5-ambiance-sticker-KC10452.jpg");
         setDiscount(0);
         setDescription("Тут пока ничего нет...");

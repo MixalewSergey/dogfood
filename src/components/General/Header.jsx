@@ -31,7 +31,7 @@ const Header=({user, setModalActive, serverGoods})=>{
             cnt+=basket[i].cnt
         }
        setCartCnt(cnt)
-       //setCartCnt(basket.reduce((acc,el)=>acc+el.cnt, 0))-другая вариация кода
+    //    setCartCnt(basket.reduce((acc,el)=>acc+el.cnt, 0)) //-другая вариация кода
     },[basket])
 
     const navigateLog= useNavigate();
