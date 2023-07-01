@@ -25,6 +25,15 @@ const Header=({user, setModalActive, serverGoods})=>{
         localStorage.getItem("rockId"))).length)
     },[serverGoods]);
 
+    useEffect(()=>{
+        let cnt = 0 ;
+        for(let i = 0 ; i<basket.length; i++){
+            cnt+=basket[i].cnt
+        }
+       setCartCnt(cnt)
+       //setCartCnt(basket.reduce((acc,el)=>acc+el.cnt, 0))-другая вариация кода
+    },[basket])
+
     const navigateLog= useNavigate();
     
     const logIn=(e)=>{

@@ -118,22 +118,6 @@ const App = () => {
       //value- объект с данными контекста
     return (
         <Ctx.Provider value={{
-            // goods,
-            // setGoods,
-            // serverGoods,
-            // setServerGoods,
-            // userId,
-            // setUserId,
-            // user,
-            // setUser,
-            // token,
-            // setToken,
-            // text,
-            // setText,
-            // api,
-            // setApi,
-            // basket,
-            // setBasket
             goods,
             setGoods,
             serverGoods,
